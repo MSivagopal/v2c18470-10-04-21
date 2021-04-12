@@ -1,0 +1,72 @@
+package assign;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.function.Predicate;
+
+public class MarksSort {
+
+	public static void main(String[] args) {
+		ArrayList<Studentlist> arrayList = new ArrayList<Studentlist>();
+		arrayList.add(new Studentlist(155, "Ragul", 80));
+		arrayList.add(new Studentlist(159, "Singaram", 19));
+		arrayList.add(new Studentlist(157, "Sridhar", 23));
+		arrayList.add(new Studentlist(153, "ASp", 75));
+		arrayList.add(new Studentlist(156, "Varshini", 56));
+		arrayList.add(new Studentlist(158, "Mohan", 67));
+		arrayList.add(new Studentlist(150, "Praveen", 98));
+		arrayList.add(new Studentlist(154, "Soundarya", 45));
+		arrayList.add(new Studentlist(152, "Shalini", 35));
+		arrayList.add(new Studentlist(151, "JP", 71));
+		arrayList.add(new Studentlist(160, "PrakashRaj", 99));
+
+		Comparator<Studentlist> c = (s1, s2) -> {
+			return s1.marks == s2.marks ? 0 : s1.marks < s2.marks ? 1 : -1;
+		};
+		Collections.sort(arrayList, c);
+		/*
+		 * for (Studentlist a : arrayList) { System.out.println(a.id + " " + a.name +
+		 * " " + a.marks); }
+		 */
+		
+		/*
+		Predicate<Studentlist> rank = (a) -> a.marks > 80;
+		Predicate<Studentlist> rank1 = (a) -> a.marks > 60 && a.marks <= 80;
+		Predicate<Studentlist> rank2 = (a) -> a.marks > 50 && a.marks <= 60;
+		Predicate<Studentlist> rank3 = (a) -> a.marks >= 35 && a.marks <= 50;
+		Predicate<Studentlist> rank4 = (a) -> a.marks < 35;
+		for (Studentlist i : arrayList) {
+			if (rank.test(i)) {
+				System.out.println("Distinction " + " " + i.name + "  " + i.marks);
+			} else if (rank1.test(i)) {
+				System.out.println("1st class " + i.marks);
+			} else if (rank2.test(i)) {
+				System.out.println("2nd class " + i.marks);
+			} else if (rank3.test(i)) {
+				System.out.println("3rd class " + i.marks);
+			} else if (rank4.test(i)) {
+				System.out.println("fail " + i.marks);
+			}
+		}
+		*/
+		arrayList.stream().filter(a -> a.marks > 80)
+				.forEach(a -> System.out.println("Distinction " + " " + a.name + "  " + a.marks));
+		arrayList.stream().filter(a -> a.marks > 60 && a.marks <= 80)
+				.forEach(a -> System.out.println("1st class " + " " + a.name + "  " + a.marks));
+	}
+
+}
+
+class Studentlist {
+	int id;
+	String name;
+	int marks;
+
+	public Studentlist(int id, String name, int marks) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.marks = marks;
+	}
+}

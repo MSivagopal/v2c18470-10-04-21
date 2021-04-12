@@ -1,0 +1,38 @@
+package assign;
+
+import java.util.ArrayList;
+
+public class StreamMain {
+
+	public static void main(String[] args) {
+		ArrayList<EmployeeDetails> list = new ArrayList<EmployeeDetails>();
+		list.add(new EmployeeDetails(158, "Mohan", 67));
+		list.add(new EmployeeDetails(150, "Praveen", 45));
+		list.add(new EmployeeDetails(154, "Soundarya", 36));
+		list.add(new EmployeeDetails(152, "Shalini", 35));
+		list.add(new EmployeeDetails(151, "JP", 71));
+		list.add(new EmployeeDetails(160, "PrakashRaj", 50));
+		
+		EmployeeDetails e1 = list.stream().max((a,b)->a.age>b.age? 1 : -1).get();
+		System.out.println("Oldest Employee: "+e1.Name+" "+e1.age);
+		
+		EmployeeDetails e2 = list.stream().min((a,b)->a.age>b.age? 1 : -1).get();
+		System.out.println("Youngest Employee: "+e2.Name+" "+e2.age);
+		
+		list.stream().filter(a->a.age>50)
+		  .forEach(a->System.out.println("Employee's above 50 years old: "+a.Name+" "+a.age));
+	}
+
+}
+class EmployeeDetails {
+	int id;
+	String Name;
+	int age;
+
+	public EmployeeDetails(int id, String name, int age) {
+		super();
+		this.id = id;
+		Name = name;
+		this.age = age;
+	}
+}
